@@ -1,8 +1,13 @@
 package study.study.common.status
 
-enum class Gender(val desc: String) {
-    MAN("남"),
-    WOMAN("여")
+enum class DormType(val desc: String) {
+    GounA("고운A"),
+    GounB("고운B"),
+    GounC("고운C"),
+    Gyung11("경상11층"),
+    Gyung12("경상12층"),
+    Gyung13("경상13층"),
+    Gyung14("경상14층"),
 }
 
 enum class ResultCode(val msg: String) {

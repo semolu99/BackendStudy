@@ -1,4 +1,4 @@
-package study.study.study.member.controller
+package study.study.member.controller
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -29,9 +29,8 @@ class MemberControllerTest(
             _loginId = "test123",
             _password = "test1234",
             _name = "테스트",
-            _birthDate = "1999-02-27",
-            _gender = "MAN",
-            _email = "test@test.com"
+            _email = "test@test.com",
+            "GounA"
         )
 
         // 의존성 주입(mocking)
