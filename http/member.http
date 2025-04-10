@@ -1,0 +1,12 @@
+### 회원가입
+POST localhost:8080/api/member/signup
+Content-Type: application/json
+
+{
+  "loginId" : "n",
+  "password" : "as",
+  "name" : "name",
+  "email": "d@d.c",
+  "dormType": "GounA"
+}
+###
