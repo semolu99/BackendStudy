@@ -4,9 +4,22 @@ Content-Type: application/json
 
 {
   "loginId" : "n",
-  "password" : "as",
+  "password" : "as123wdeqwe!",
   "name" : "name",
   "email": "d@d.c",
   "dormType": "GounA"
 }
-###
+### 로그인
+POST localhost:8080/api/member/login
+Content-Type: application/json
+
+{
+  "loginId" : "n",
+  "password" : "as123wdeqwe!"
+}
+> {%
+    client.global.set("acToken",response.body.data.accessToken);
+%}
+### 내정보조회
+GET localhost:8080/api/member/info
+Authorization: Bearer {{acToken}}

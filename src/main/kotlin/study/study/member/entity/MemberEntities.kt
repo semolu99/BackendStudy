@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.EnumNaming
 import jakarta.persistence.*
 import study.study.common.status.DormType
 import study.study.common.status.ROLE
+import study.study.member.dto.MemberDtoResponse
 import java.time.LocalDate
 
 @Entity
@@ -32,6 +33,15 @@ class Member(
 ) {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     val memberRole : List<MemberRole>? = null
+
+    fun toDto(): MemberDtoResponse =
+        MemberDtoResponse(
+            id!!,
+            loginId,
+            name,
+            email,
+            dormType.desc
+        )
 }
 
 @Entity

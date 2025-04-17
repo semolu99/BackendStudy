@@ -16,7 +16,6 @@ data class BoardDtoRequest(
     @JsonProperty("content")
     private val _content : String?,
 
-    private val writer : String = "익명의 작성자",
     private val likes : Long = 0,
     private val createDate: LocalDateTime = LocalDateTime.now()
 ) {
@@ -26,7 +25,9 @@ data class BoardDtoRequest(
         get() = _content!!.toString()
 
 
-    fun toEntity() : Board = Board(
-        null,title,content,writer,likes,createDate
-    )
+    fun toEntity(writer: String) : Board {
+        return Board(
+            null,title,content,writer,likes,createDate
+        )
+    }
 }
