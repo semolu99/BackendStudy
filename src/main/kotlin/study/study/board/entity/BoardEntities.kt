@@ -18,4 +18,5 @@ class Board(
     var likes : Long,
     @Column(nullable = false, length = 30, updatable = false)
     val createDate: LocalDateTime
-)
+) {
+}
