@@ -13,5 +13,3 @@ GET localhost:8080/api/board/
 
 ### 특정 게시물 꺼내기
 GET localhost:8080/api/board/3
-
-

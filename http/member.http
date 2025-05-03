@@ -4,6 +4,28 @@ Content-Type: application/json
 
 {
   "loginId" : "n",
+  "password" : "qwer1234!",
+  "name" : "name",
+  "email": "d@d.c",
+  "dormType": "GounA"
+}
+### 회원가입
+POST localhost:8080/api/member/signup
+Content-Type: application/json
+
+{
+  "loginId" : "232132f234dg3wqe",
+  "password" : "as123wdeqwe!",
+  "name" : "name",
+  "email": "d@d.c",
+  "dormType": "GounA"
+}
+### 회원가입
+POST localhost:8080/api/member/signup
+Content-Type: application/json
+
+{
+  "loginId" : "2342wqe",
   "password" : "as123wdeqwe!",
   "name" : "name",
   "email": "d@d.c",
@@ -15,11 +37,14 @@ Content-Type: application/json
 
 {
   "loginId" : "n",
-  "password" : "as123wdeqwe!"
+  "password" : "qwer1234!"
 }
 > {%
     client.global.set("acToken",response.body.data.accessToken);
 %}
 ### 내정보조회
 GET localhost:8080/api/member/info
+Authorization: Bearer {{acToken}}
+### 같은 기숙사 리스트
+GET localhost:8080/api/member/dorm/info
 Authorization: Bearer {{acToken}}

@@ -11,7 +11,7 @@ import study.study.member.repository.MemberRepository
 @Service
 class BoardService(
     private val boardRepository: BoardRepository,
-    private val memberRepository: MemberRepository
+    private val memberRepository: MemberRepository,
 ) {
     /**
      * 게시글 작성

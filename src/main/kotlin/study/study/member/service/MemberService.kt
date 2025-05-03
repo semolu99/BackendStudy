@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import study.study.common.authority.JwtTokenProvider
 import study.study.common.authority.TokenInfo
@@ -45,9 +46,19 @@ class MemberService(
      * 로그인
      */
     fun login(loginDto: LoginDto): TokenInfo {
-        val authenticationToken = UsernamePasswordAuthenticationToken(loginDto.loginId, loginDto.password)
+        println("1")
+        val member = memberRepository.findByLoginId(loginDto.loginId) ?: throw InvalidInputException("로그인 아이디 혹은 비밀번호가 틀렸습니다.")
+        println("2")
+        val encoder = SCryptPasswordEncoder(16,8,1,8,8)
+        println("3")
+        if(!encoder.matches(loginDto.password, member.password)){
+            throw InvalidInputException("로그인 아이디 혹은 비밀번호가 틀렸습니다.")
+        }
+        println("4")
+        val authenticationToken = UsernamePasswordAuthenticationToken(loginDto.loginId, member.password)
+        println("5")
         val authentication = authenticationManagerBuilder.`object`.authenticate(authenticationToken)
-
+        println("6")
         return jwtTokenProvider.createToken(authentication)
     }
     /**
@@ -65,5 +76,13 @@ class MemberService(
         val member = memberDtoRequest.toEntity()
         memberRepository.save(member)
         return "수정 완료."
+    }
+    /**
+     * 같은 기숙사 타입 리스트
+     */
+    fun dormInfo(id: Long): List<MemberDtoResponse> {
+        val dormType = memberRepository.findByIdOrNull(id)!!.dormType
+        val result = memberRepository.findAllByDormType(dormType)
+        return result.map { it.toDto() }
     }
 }

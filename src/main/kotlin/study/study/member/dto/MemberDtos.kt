@@ -4,11 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder
 import study.study.common.annotation.ValidEnum
 import study.study.common.status.DormType
 import study.study.member.entity.Member
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 data class MemberDtoRequest(
     var id : Long?,
@@ -40,19 +39,21 @@ data class MemberDtoRequest(
     @JsonProperty("dormType")
     private val _dormType: String?,
 ){
+    private val encoder = SCryptPasswordEncoder(16,8,1,8,8)
+
     val loginId: String
         get() = _loginId!!
 
-    val password: String
-        get() = _password!!
+    private val password: String
+        get() = encoder.encode(_password)
 
-    val name: String
+    private val name: String
         get() = _name!!
 
-    val email: String
+    private val email: String
         get() = _email!!
 
-    val dormType: DormType
+    private val dormType: DormType
         get() = DormType.valueOf(_dormType!!)
 
     fun toEntity(): Member =
@@ -80,4 +81,6 @@ data class MemberDtoResponse(
     val name: String,
     val email: String,
     val dormType: String,
-)
+){
+
+}

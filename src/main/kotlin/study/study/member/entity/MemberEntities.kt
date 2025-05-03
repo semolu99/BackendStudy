@@ -19,7 +19,7 @@ class Member(
     @Column(nullable = false, length = 30, updatable = false)
     val loginId : String,
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false)
     val password: String,
 
     @Column(nullable = false, length = 10)
