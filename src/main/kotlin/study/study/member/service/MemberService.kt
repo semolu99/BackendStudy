@@ -46,19 +46,13 @@ class MemberService(
      * 로그인
      */
     fun login(loginDto: LoginDto): TokenInfo {
-        println("1")
         val member = memberRepository.findByLoginId(loginDto.loginId) ?: throw InvalidInputException("로그인 아이디 혹은 비밀번호가 틀렸습니다.")
-        println("2")
         val encoder = SCryptPasswordEncoder(16,8,1,8,8)
-        println("3")
         if(!encoder.matches(loginDto.password, member.password)){
             throw InvalidInputException("로그인 아이디 혹은 비밀번호가 틀렸습니다.")
         }
-        println("4")
         val authenticationToken = UsernamePasswordAuthenticationToken(loginDto.loginId, member.password)
-        println("5")
         val authentication = authenticationManagerBuilder.`object`.authenticate(authenticationToken)
-        println("6")
         return jwtTokenProvider.createToken(authentication)
     }
     /**
