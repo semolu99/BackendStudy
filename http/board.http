@@ -4,8 +4,8 @@ Content-Type: application/json
 Authorization: Bearer {{acToken}}
 
 {
-  "title": "제221111목",
-  "content": "내2221111용"
+  "title": "제22111ㄷㅂㅈㄷ1목",
+  "content": "내2221ㅂㅈㄷㅂ111용"
 }
 
 ### 작성 확인
